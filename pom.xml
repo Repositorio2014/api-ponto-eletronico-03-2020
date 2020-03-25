@@ -42,7 +42,20 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+			<version>6.3.0</version>
 		</dependency>
+		
+				<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -59,13 +72,26 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			  <groupId>junit</groupId>     <!-- NOT org.junit here -->
+			  <artifactId>junit-dep</artifactId>
+			  <version>4.8.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
+<!-- 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin> -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<fork>true</fork>
+					<executable>C:\Program Files\Java\jdk1.8.0_241\bin\javac.exe</executable>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
