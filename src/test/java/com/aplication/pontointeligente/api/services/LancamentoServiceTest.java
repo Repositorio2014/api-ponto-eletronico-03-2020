@@ -1,9 +1,13 @@
 package com.aplication.pontointeligente.api.services;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +28,7 @@ import com.aplication.pontointeligente.api.entity.Empresa;
 import com.aplication.pontointeligente.api.entity.Funcionario;
 import com.aplication.pontointeligente.api.entity.Lancamento;
 import com.aplication.pontointeligente.api.enums.PerfilEnum;
+import com.aplication.pontointeligente.api.enums.TipoEnum;
 import com.aplication.pontointeligente.api.repositories.LancamentoRepository;
 import com.aplication.pontointeligente.api.utils.PasswordUtils;
 
@@ -53,6 +58,22 @@ public class LancamentoServiceTest {
 		assertNotNull(lancamento);
 	}
 	
+	
+	@Test
+	public void testBuscarLancametoPorId() throws NoSuchAlgorithmException {
+		Empresa empresa = this.obterDadosEmpresa();
+		Funcionario funcionario = this.obterDadosFuncionario(empresa);
+		Lancamento lancament = this.obterDadosLancamentos(funcionario);
+		
+		assertEquals(1L, lancament.getId());
+	}	 
+	
+	@Test
+	public void testPersistirLancamento() {
+		Lancamento lancamento = this.lancamentoService.persistir(new Lancamento());
+		assertNotNull(lancamento);
+	}
+	
 	private Funcionario obterDadosFuncionario(Empresa empresa) throws NoSuchAlgorithmException {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setNome("Fulano de Tal");
@@ -69,6 +90,15 @@ public class LancamentoServiceTest {
 		empresa.setRazaoSocial("Empresa de exemplo");
 		empresa.setCnpj("51463645000100");
 		return empresa;
+	}
+	
+	private Lancamento obterDadosLancamentos(Funcionario funcionario) {
+		Lancamento lancamento = new Lancamento();
+		lancamento.setId(1L);
+		lancamento.setData(new Date());
+		lancamento.setTipo(TipoEnum.INICIO_ALMOCO);
+		lancamento.setFuncionario(funcionario);
+		return lancamento;
 	}
 	
 }
